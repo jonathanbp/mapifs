@@ -13,6 +13,11 @@
 		AB1F2D3D1452189D00EA0198 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AB1F2D3B1452189D00EA0198 /* Credits.rtf */; };
 		AB1F2D401452189D00EA0198 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1F2D3F1452189D00EA0198 /* AppDelegate.m */; };
 		AB1F2D431452189D00EA0198 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB1F2D411452189D00EA0198 /* MainMenu.xib */; };
+		AB1F2D4A145218B100EA0198 /* Fuse4X.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F2D49145218B100EA0198 /* Fuse4X.framework */; };
+		AB1F2D4E145218E900EA0198 /* MAPIFuseFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1F2D4D145218E900EA0198 /* MAPIFuseFileSystem.m */; };
+		AB1F2D5514521BE700EA0198 /* Fuse.icns in Resources */ = {isa = PBXBuildFile; fileRef = AB1F2D5314521BE700EA0198 /* Fuse.icns */; };
+		AB1F2D5614521BE700EA0198 /* hellodoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = AB1F2D5414521BE700EA0198 /* hellodoc.icns */; };
+		AB51E7F51456061D00670509 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = AB51E7F41456061D00670509 /* XMLReader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +26,21 @@
 		AB1F2D2F1452189D00EA0198 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		AB1F2D301452189D00EA0198 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AB1F2D311452189D00EA0198 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		AB1F2D341452189D00EA0198 /* mapifs-Info.plist */ = {isa = PBXFileReference; path = "mapifs-Info.plist"; sourceTree = "<group>"; };
+		AB1F2D341452189D00EA0198 /* mapifs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "mapifs-Info.plist"; sourceTree = "<group>"; };
 		AB1F2D361452189D00EA0198 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AB1F2D381452189D00EA0198 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AB1F2D3A1452189D00EA0198 /* mapifs-Prefix.pch */ = {isa = PBXFileReference; path = "mapifs-Prefix.pch"; sourceTree = "<group>"; };
+		AB1F2D3A1452189D00EA0198 /* mapifs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mapifs-Prefix.pch"; sourceTree = "<group>"; };
 		AB1F2D3C1452189D00EA0198 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		AB1F2D3E1452189D00EA0198 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		AB1F2D3E1452189D00EA0198 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AB1F2D3F1452189D00EA0198 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AB1F2D421452189D00EA0198 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		AB1F2D49145218B100EA0198 /* Fuse4X.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuse4X.framework; path = Library/Frameworks/Fuse4X.framework; sourceTree = SDKROOT; };
+		AB1F2D4C145218E900EA0198 /* MAPIFuseFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAPIFuseFileSystem.h; sourceTree = "<group>"; };
+		AB1F2D4D145218E900EA0198 /* MAPIFuseFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAPIFuseFileSystem.m; sourceTree = "<group>"; };
+		AB1F2D5314521BE700EA0198 /* Fuse.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Fuse.icns; sourceTree = "<group>"; };
+		AB1F2D5414521BE700EA0198 /* hellodoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = hellodoc.icns; sourceTree = "<group>"; };
+		AB51E7F31456061D00670509 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
+		AB51E7F41456061D00670509 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB1F2D4A145218B100EA0198 /* Fuse4X.framework in Frameworks */,
 				AB1F2D2D1452189D00EA0198 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +59,7 @@
 		AB1F2D1D1452189D00EA0198 = {
 			isa = PBXGroup;
 			children = (
+				AB1F2D49145218B100EA0198 /* Fuse4X.framework */,
 				AB1F2D321452189D00EA0198 /* mapifs */,
 				AB1F2D2B1452189D00EA0198 /* Frameworks */,
 				AB1F2D291452189D00EA0198 /* Products */,
@@ -82,6 +96,7 @@
 		AB1F2D321452189D00EA0198 /* mapifs */ = {
 			isa = PBXGroup;
 			children = (
+				AB1F2D4B145218C400EA0198 /* Classes */,
 				AB1F2D3E1452189D00EA0198 /* AppDelegate.h */,
 				AB1F2D3F1452189D00EA0198 /* AppDelegate.m */,
 				AB1F2D411452189D00EA0198 /* MainMenu.xib */,
@@ -93,6 +108,8 @@
 		AB1F2D331452189D00EA0198 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AB1F2D5314521BE700EA0198 /* Fuse.icns */,
+				AB1F2D5414521BE700EA0198 /* hellodoc.icns */,
 				AB1F2D341452189D00EA0198 /* mapifs-Info.plist */,
 				AB1F2D351452189D00EA0198 /* InfoPlist.strings */,
 				AB1F2D381452189D00EA0198 /* main.m */,
@@ -102,6 +119,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AB1F2D4B145218C400EA0198 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				AB51E7F31456061D00670509 /* XMLReader.h */,
+				AB51E7F41456061D00670509 /* XMLReader.m */,
+				AB1F2D4C145218E900EA0198 /* MAPIFuseFileSystem.h */,
+				AB1F2D4D145218E900EA0198 /* MAPIFuseFileSystem.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,9 +137,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB1F2D461452189D00EA0198 /* Build configuration list for PBXNativeTarget "mapifs" */;
 			buildPhases = (
+				AB1F2D261452189D00EA0198 /* Resources */,
 				AB1F2D241452189D00EA0198 /* Sources */,
 				AB1F2D251452189D00EA0198 /* Frameworks */,
-				AB1F2D261452189D00EA0198 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -156,6 +184,8 @@
 				AB1F2D371452189D00EA0198 /* InfoPlist.strings in Resources */,
 				AB1F2D3D1452189D00EA0198 /* Credits.rtf in Resources */,
 				AB1F2D431452189D00EA0198 /* MainMenu.xib in Resources */,
+				AB1F2D5514521BE700EA0198 /* Fuse.icns in Resources */,
+				AB1F2D5614521BE700EA0198 /* hellodoc.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +198,8 @@
 			files = (
 				AB1F2D391452189D00EA0198 /* main.m in Sources */,
 				AB1F2D401452189D00EA0198 /* AppDelegate.m in Sources */,
+				AB1F2D4E145218E900EA0198 /* MAPIFuseFileSystem.m in Sources */,
+				AB51E7F51456061D00670509 /* XMLReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +238,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -233,7 +265,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -251,9 +283,11 @@
 		AB1F2D471452189D00EA0198 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "mapifs/mapifs-Prefix.pch";
 				INFOPLIST_FILE = "mapifs/mapifs-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -262,9 +296,11 @@
 		AB1F2D481452189D00EA0198 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "mapifs/mapifs-Prefix.pch";
 				INFOPLIST_FILE = "mapifs/mapifs-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -289,6 +325,7 @@
 				AB1F2D481452189D00EA0198 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

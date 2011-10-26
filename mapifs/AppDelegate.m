@@ -28,7 +28,7 @@
   MAPIFuseFileSystem* hello = [[MAPIFuseFileSystem alloc] initWithTypes:[NSArray arrayWithObjects: @"Organization", @"Location", @"Personnel", @"Bed", nil]];
   fs_ = [[GMUserFileSystem alloc] initWithDelegate:hello isThreadSafe:YES];
   NSMutableArray* options = [NSMutableArray array];
-  [options addObject:@"rdonly"];
+  //[options addObject:@"rdonly"];
   [options addObject:@"volname=MAPIFS"];
   [options addObject:[NSString stringWithFormat:@"volicon=%@", 
                       [[NSBundle mainBundle] pathForResource:@"Fuse" ofType:@"icns"]]];

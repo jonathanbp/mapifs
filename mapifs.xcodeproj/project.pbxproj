@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB09B2E2145896C600369027 /* interfaces.h in Resources */ = {isa = PBXBuildFile; fileRef = AB09B2E1145896C600369027 /* interfaces.h */; };
 		AB1F2D2D1452189D00EA0198 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F2D2C1452189D00EA0198 /* Cocoa.framework */; };
 		AB1F2D371452189D00EA0198 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB1F2D351452189D00EA0198 /* InfoPlist.strings */; };
 		AB1F2D391452189D00EA0198 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1F2D381452189D00EA0198 /* main.m */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB09B2E1145896C600369027 /* interfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interfaces.h; sourceTree = "<group>"; };
 		AB1F2D281452189D00EA0198 /* mapifs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapifs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB1F2D2C1452189D00EA0198 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AB1F2D2F1452189D00EA0198 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -115,6 +117,7 @@
 				AB1F2D381452189D00EA0198 /* main.m */,
 				AB1F2D3A1452189D00EA0198 /* mapifs-Prefix.pch */,
 				AB1F2D3B1452189D00EA0198 /* Credits.rtf */,
+				AB09B2E1145896C600369027 /* interfaces.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 				AB1F2D431452189D00EA0198 /* MainMenu.xib in Resources */,
 				AB1F2D5514521BE700EA0198 /* Fuse.icns in Resources */,
 				AB1F2D5614521BE700EA0198 /* hellodoc.icns in Resources */,
+				AB09B2E2145896C600369027 /* interfaces.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

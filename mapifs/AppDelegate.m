@@ -25,13 +25,17 @@
                  name:kGMUserFileSystemDidUnmount object:nil];
   
   NSString* mountPath = @"/Volumes/MAPI";
-  MAPIFuseFileSystem* hello = [[MAPIFuseFileSystem alloc] initWithTypes:[NSArray arrayWithObjects: @"Organization", @"Location", @"Personnel", @"Bed", nil]];
-  fs_ = [[GMUserFileSystem alloc] initWithDelegate:hello isThreadSafe:YES];
+  
+  // create single mapi endpoint
+  MAPI *mapi = [[MAPI alloc] initWithURL:[NSURL URLWithString:@"172.16.125.214:8080"] userName:@"spider" andPassword:@"spider"];
+  
+  MAPIFuseFileSystem* mapifs = [[MAPIFuseFileSystem alloc] initWithTypes:[NSArray arrayWithObjects: @"Organization", @"Location", @"Personnel", @"Bed", nil] andMAPI:mapi];
+  
+  fs_ = [[GMUserFileSystem alloc] initWithDelegate:mapifs isThreadSafe:YES];
   NSMutableArray* options = [NSMutableArray array];
   //[options addObject:@"rdonly"];
   [options addObject:@"volname=MAPIFS"];
-  [options addObject:[NSString stringWithFormat:@"volicon=%@", 
-                      [[NSBundle mainBundle] pathForResource:@"Fuse" ofType:@"icns"]]];
+  [options addObject:[NSString stringWithFormat:@"volicon=%@", [[NSBundle mainBundle] pathForResource:@"Fuse" ofType:@"icns"]]];
   [fs_ mountAtPath:mountPath withOptions:options];
 }
 
@@ -44,6 +48,8 @@
 }
 
 - (void)didUnmount:(NSNotification*)notification {
+  [[fs_ delegate] release]; 
+  [fs_ release];
   [[NSApplication sharedApplication] terminate:nil];
 }
 

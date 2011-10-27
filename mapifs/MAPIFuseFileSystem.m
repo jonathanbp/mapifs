@@ -15,11 +15,12 @@ static NSString *helloPath = @"/hello.txt";
 
 @implementation MAPIFuseFileSystem
 
-@synthesize types;
+@synthesize types, mapi;
 
-- (id)initWithTypes:(NSArray *)mapitypes {
+- (id)initWithTypes:(NSArray *)mapitypes andMAPI:(MAPI *)theMAPI {
   
   self.types = mapitypes;
+  self.mapi = theMAPI;
 
   return [self init];
 }
@@ -42,18 +43,14 @@ static NSString *helloPath = @"/hello.txt";
 
 // probably delete
 - (NSData *)contentsAtPath:(NSString *)path {
+  
+  NSLog(@"contentsAtPath %@", path);
+  
   int entityId = [[[path pathComponents] lastObject] intValue];
   if (entityId > 0) {
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[@"http://spider:spider@172.16.125.214:8080" stringByAppendingString:[[path componentsSeparatedByString:@"."] objectAtIndex:0]]]];
+    return [self.mapi GET:[path stringByDeletingPathExtension]];
     
-    NSError *error = nil;
-    NSURLResponse *response = nil;
-    
-    // Synchronous isn't ideal, but simplifies the code for the Demo
-    NSData *xmlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    return xmlData;
   } else {
     return nil;
   }
@@ -121,19 +118,9 @@ static NSString *helloPath = @"/hello.txt";
   
   NSString* s = [NSString stringWithCString:buffer encoding:NSUTF8StringEncoding];
   
-    NSLog(@"write %@\n%@", path, s);
+  NSLog(@"write %@\n%@", path, s);
   
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[@"http://spider:spider@172.16.125.214:8080" stringByAppendingString:[path stringByDeletingPathExtension]]]];
-  
-  [request setHTTPMethod:@"PUT"];
-  [request setHTTPBody:[NSData dataWithBytes:buffer length:size]];
-  
-  NSError *e = nil;
-  NSHTTPURLResponse *response = nil;
-  
-  // Synchronous isn't ideal, but simplifies the code for the Demo
-  NSData *xmlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&e];
-  
+  [self.mapi UPDATE:[path stringByDeletingPathExtension] withData:[NSData dataWithBytes:buffer length:size]];
 
   return (int)size;
   
@@ -142,7 +129,9 @@ static NSString *helloPath = @"/hello.txt";
 - (BOOL)exchangeDataOfItemAtPath:(NSString *)path1
                   withItemAtPath:(NSString *)path2
                            error:(NSError **)error {
-   NSLog(@"exchangeDataOfItem %@ %@",path1,path2); 
+  
+  NSLog(@"exchangeDataOfItem %@ %@",path1,path2); 
+  
   return NO;
 }
 
@@ -158,24 +147,15 @@ static NSString *helloPath = @"/hello.txt";
     for (NSString *type in self.types) {
       if ([[@"/" stringByAppendingPathComponent:type] isEqualToString:path] ) {
         
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[@"http://spider:spider@172.16.125.214:8080/" stringByAppendingString:type]]];
+        NSData *data = [self.mapi GET:[@"/" stringByAppendingString:type]];
         
-        NSError *error = nil;
-        NSURLResponse *response = nil;
+        NSError *error;
         
-        // Synchronous isn't ideal, but simplifies the code for the Demo
-        NSData *xmlData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        // Parse the XML Data into an NSDictionary
-        NSDictionary *entities = [[XMLReader dictionaryForXMLData:xmlData error:&error] retain];
-        
-        //NSLog(@"%@", [[[entities objectForKey:@"Collection"] objectForKey:type] valueForKey:@"Id"]);
+        NSDictionary *entities = [[XMLReader dictionaryForXMLData:data error:&error] retain];
         
         NSMutableArray *files = [[NSMutableArray alloc] init];
         for (NSString *entityId in [[[entities objectForKey:@"Collection"] objectForKey:type] valueForKey:@"Id"]) {
-          
           [files addObject:[NSString stringWithFormat:@"%@.xml", entityId]];
-          
         }
         return files;
         

@@ -18,6 +18,11 @@
 		AB1F2D4E145218E900EA0198 /* MAPIFuseFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1F2D4D145218E900EA0198 /* MAPIFuseFileSystem.m */; };
 		AB1F2D5514521BE700EA0198 /* Fuse.icns in Resources */ = {isa = PBXBuildFile; fileRef = AB1F2D5314521BE700EA0198 /* Fuse.icns */; };
 		AB1F2D5614521BE700EA0198 /* hellodoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = AB1F2D5414521BE700EA0198 /* hellodoc.icns */; };
+		AB3163D11500EB8C00BFC740 /* MAPIFuseTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3163D01500EB8C00BFC740 /* MAPIFuseTransaction.m */; };
+		AB3163D61500EBAF00BFC740 /* MAPIFuseTransactionalAction.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3163D51500EBAF00BFC740 /* MAPIFuseTransactionalAction.m */; };
+		AB3163D91503702100BFC740 /* MAPIFuseTransactionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3163D81503702100BFC740 /* MAPIFuseTransactionManager.m */; };
+		AB3163DC150371FA00BFC740 /* MAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3163DB150371FA00BFC740 /* MAPI.m */; };
+		AB3163E315038C4B00BFC740 /* MAPIFuseTransactionXMLSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3163E215038C4B00BFC740 /* MAPIFuseTransactionXMLSerializer.m */; };
 		AB51E7F51456061D00670509 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = AB51E7F41456061D00670509 /* XMLReader.m */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +46,17 @@
 		AB1F2D4D145218E900EA0198 /* MAPIFuseFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAPIFuseFileSystem.m; sourceTree = "<group>"; };
 		AB1F2D5314521BE700EA0198 /* Fuse.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Fuse.icns; sourceTree = "<group>"; };
 		AB1F2D5414521BE700EA0198 /* hellodoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = hellodoc.icns; sourceTree = "<group>"; };
+		AB3163CF1500EB8C00BFC740 /* MAPIFuseTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAPIFuseTransaction.h; sourceTree = "<group>"; };
+		AB3163D01500EB8C00BFC740 /* MAPIFuseTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAPIFuseTransaction.m; sourceTree = "<group>"; };
+		AB3163D41500EBAF00BFC740 /* MAPIFuseTransactionalAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAPIFuseTransactionalAction.h; sourceTree = "<group>"; };
+		AB3163D51500EBAF00BFC740 /* MAPIFuseTransactionalAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAPIFuseTransactionalAction.m; sourceTree = "<group>"; };
+		AB3163D71503702100BFC740 /* MAPIFuseTransactionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAPIFuseTransactionManager.h; sourceTree = "<group>"; };
+		AB3163D81503702100BFC740 /* MAPIFuseTransactionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAPIFuseTransactionManager.m; sourceTree = "<group>"; };
+		AB3163DA150371FA00BFC740 /* MAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAPI.h; sourceTree = "<group>"; };
+		AB3163DB150371FA00BFC740 /* MAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAPI.m; sourceTree = "<group>"; };
+		AB3163E015038B3400BFC740 /* MAPIFuseTransactionSerializerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAPIFuseTransactionSerializerProtocol.h; sourceTree = "<group>"; };
+		AB3163E115038C4B00BFC740 /* MAPIFuseTransactionXMLSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAPIFuseTransactionXMLSerializer.h; sourceTree = "<group>"; };
+		AB3163E215038C4B00BFC740 /* MAPIFuseTransactionXMLSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAPIFuseTransactionXMLSerializer.m; sourceTree = "<group>"; };
 		AB51E7F31456061D00670509 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
 		AB51E7F41456061D00670509 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,12 +141,31 @@
 		AB1F2D4B145218C400EA0198 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AB3163D31500EB9400BFC740 /* Transactions */,
+				AB3163DA150371FA00BFC740 /* MAPI.h */,
+				AB3163DB150371FA00BFC740 /* MAPI.m */,
 				AB51E7F31456061D00670509 /* XMLReader.h */,
 				AB51E7F41456061D00670509 /* XMLReader.m */,
 				AB1F2D4C145218E900EA0198 /* MAPIFuseFileSystem.h */,
 				AB1F2D4D145218E900EA0198 /* MAPIFuseFileSystem.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		AB3163D31500EB9400BFC740 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				AB3163E015038B3400BFC740 /* MAPIFuseTransactionSerializerProtocol.h */,
+				AB3163CF1500EB8C00BFC740 /* MAPIFuseTransaction.h */,
+				AB3163D01500EB8C00BFC740 /* MAPIFuseTransaction.m */,
+				AB3163D41500EBAF00BFC740 /* MAPIFuseTransactionalAction.h */,
+				AB3163D51500EBAF00BFC740 /* MAPIFuseTransactionalAction.m */,
+				AB3163D71503702100BFC740 /* MAPIFuseTransactionManager.h */,
+				AB3163D81503702100BFC740 /* MAPIFuseTransactionManager.m */,
+				AB3163E115038C4B00BFC740 /* MAPIFuseTransactionXMLSerializer.h */,
+				AB3163E215038C4B00BFC740 /* MAPIFuseTransactionXMLSerializer.m */,
+			);
+			name = Transactions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +239,11 @@
 				AB1F2D401452189D00EA0198 /* AppDelegate.m in Sources */,
 				AB1F2D4E145218E900EA0198 /* MAPIFuseFileSystem.m in Sources */,
 				AB51E7F51456061D00670509 /* XMLReader.m in Sources */,
+				AB3163D11500EB8C00BFC740 /* MAPIFuseTransaction.m in Sources */,
+				AB3163D61500EBAF00BFC740 /* MAPIFuseTransactionalAction.m in Sources */,
+				AB3163D91503702100BFC740 /* MAPIFuseTransactionManager.m in Sources */,
+				AB3163DC150371FA00BFC740 /* MAPI.m in Sources */,
+				AB3163E315038C4B00BFC740 /* MAPIFuseTransactionXMLSerializer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,12 +15,26 @@ static NSString *helloPath = @"/hello.txt";
 
 @implementation MAPIFuseFileSystem
 
-@synthesize types, mapi;
+@synthesize types, mapi, transactionManager;
 
-- (id)initWithTypes:(NSArray *)mapitypes andMAPI:(MAPI *)theMAPI {
+- (id)initWithTypes:(NSArray *)mapitypes MAPI:(MAPI *)theMAPI andTransactionManager:(MAPIFuseTransactionManager *)tm{
+  
+  /* structure is:
+   
+    /
+    |- Transactions
+    |  |- current.sh  
+    | 
+    |- Entities
+       |- Organization
+       |- BedPlace
+       |- <etc.>
+  
+  */
   
   self.types = mapitypes;
   self.mapi = theMAPI;
+  self.transactionManager = tm;
 
   return [self init];
 }
@@ -52,6 +66,7 @@ static NSString *helloPath = @"/hello.txt";
     return [self.mapi GET:[path stringByDeletingPathExtension]];
     
   } else {
+    // TODO get contents using <type>-<filename> as key from current transaction structure
     return nil;
   }
 
@@ -79,6 +94,8 @@ static NSString *helloPath = @"/hello.txt";
               attributes:(NSDictionary *)attributes
                 userData:(id *)userData
                    error:(NSError **)error {
+  // TODO create transactional create with key <type>-<filename>
+  //      add create to current transaction
   return NO;
 }
 
@@ -119,6 +136,7 @@ static NSString *helloPath = @"/hello.txt";
   NSString* s = [NSString stringWithCString:buffer encoding:NSUTF8StringEncoding];
   
   NSLog(@"write %@\n%@", path, s);
+  
   
   [self.mapi UPDATE:[path stringByDeletingPathExtension] withData:[NSData dataWithBytes:buffer length:size]];
 

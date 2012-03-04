@@ -8,17 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "MAPI.h"
+#import "MAPIFuseTransactionManager.h"
 
 @interface MAPIFuseFileSystem : NSObject {
   
   NSArray *types;
   MAPI *mapi;
+  MAPIFuseTransactionManager *transactionManager;
   
 }
 
 @property (nonatomic, retain) NSArray *types;
 @property (nonatomic, retain) MAPI *mapi;
+@property (nonatomic, retain) MAPIFuseTransactionManager *transactionManager;
 
-- (id)initWithTypes:(NSArray *)mapitypes andMAPI:(MAPI *)theMAPI;
+- (id)initWithTypes:(NSArray *)mapitypes MAPI:(MAPI *)theMAPI andTransactionManager:(MAPIFuseTransactionManager *)tm;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MAPIFuseFileSystem.h"
+#import "MAPIFuseTransactionManager.h"
 #import "XMLReader.h"
 #import <Fuse4X/Fuse4X.h>
 
@@ -26,10 +27,13 @@
   
   NSString* mountPath = @"/Volumes/MAPI";
   
+  // create a transactional manager
+  MAPIFuseTransactionManager *tm = [[MAPIFuseTransactionManager alloc] init];
+  
   // create single mapi endpoint
   MAPI *mapi = [[MAPI alloc] initWithURL:[NSURL URLWithString:@"172.16.125.214:8080"] userName:@"spider" andPassword:@"spider"];
   
-  MAPIFuseFileSystem* mapifs = [[MAPIFuseFileSystem alloc] initWithTypes:[NSArray arrayWithObjects: @"Organization", @"Location", @"Personnel", @"Bed", nil] andMAPI:mapi];
+  MAPIFuseFileSystem* mapifs = [[MAPIFuseFileSystem alloc] initWithTypes:[NSArray arrayWithObjects: @"Organization", @"Location", @"Personnel", @"Bed", nil] MAPI:mapi andTransactionManager:tm];
   
   fs_ = [[GMUserFileSystem alloc] initWithDelegate:mapifs isThreadSafe:YES];
   NSMutableArray* options = [NSMutableArray array];

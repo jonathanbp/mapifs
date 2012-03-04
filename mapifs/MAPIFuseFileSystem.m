@@ -9,13 +9,27 @@
 #import "MAPIFuseFileSystem.h"
 #import <Fuse4X/Fuse4X.h>
 #import "XMLReader.h"
+#import "MAPIFuseTransactionXMLSerializer.h"
 
 static NSString *helloStr = @"Hello World!\n";
 static NSString *helloPath = @"/hello.txt";
 
+@interface MAPIFuseFileSystem()
+@property (nonatomic, retain) NSArray *topLevelFolders;
+@property (nonatomic, retain) id<MAPIFuseTransactionSerializerProtocol> serializer;
+@end
+
+/*typedef enum {
+  
+  Transactions,
+  Entities
+  
+} TopLevelFolder;*/
+
+
 @implementation MAPIFuseFileSystem
 
-@synthesize types, mapi, transactionManager;
+@synthesize types, mapi, transactionManager, topLevelFolders, serializer;
 
 - (id)initWithTypes:(NSArray *)mapitypes MAPI:(MAPI *)theMAPI andTransactionManager:(MAPIFuseTransactionManager *)tm{
   
@@ -32,9 +46,21 @@ static NSString *helloPath = @"/hello.txt";
   
   */
   
+  
+  self.topLevelFolders = [NSArray arrayWithObjects:@"Transactions", @"Entities", nil];
+  self.serializer = [[MAPIFuseTransactionXMLSerializer alloc] init];
+  
   self.types = mapitypes;
   self.mapi = theMAPI;
   self.transactionManager = tm;
+  
+  
+  // BEGIN: TEST DATA
+  
+  MAPIFuseTransaction *t = [tm beginTransaction:@"test"];
+  [t enlist:@"Organization/youknowit" type:@"Organization" withMethod:CREATE];
+    
+  // END: TEST DATA
 
   return [self init];
 }
@@ -60,16 +86,21 @@ static NSString *helloPath = @"/hello.txt";
   
   NSLog(@"contentsAtPath %@", path);
   
-  int entityId = [[[path pathComponents] lastObject] intValue];
+  MAPIFuseTransaction *currentTransaction = [self.transactionManager currentTransaction];
+  NSString *entity = [path stringByReplacingOccurrencesOfString:@"/Entities/" withString:@""];
+  if (currentTransaction != nil && [currentTransaction isEnlisted:entity]) {
+    return [[self.serializer serializeTransactionalAction:[currentTransaction actionWithEntity:entity]] dataUsingEncoding:NSUTF8StringEncoding];
+  }
+  
+  NSArray *pathComponents = [path pathComponents];
+  int entityId = [[pathComponents lastObject] intValue];
   if (entityId > 0) {
     
-    return [self.mapi GET:[path stringByDeletingPathExtension]];
+    entity = [NSString stringWithFormat:@"%@/%@", [pathComponents objectAtIndex:pathComponents.count-2], [pathComponents lastObject]];
     
-  } else {
-    // TODO get contents using <type>-<filename> as key from current transaction structure
-    return nil;
-  }
-
+    return [self.mapi GET:entity];
+    
+  } 
 }
 
 
@@ -94,9 +125,25 @@ static NSString *helloPath = @"/hello.txt";
               attributes:(NSDictionary *)attributes
                 userData:(id *)userData
                    error:(NSError **)error {
+  
+  if (![path hasPrefix:@"/Entities"]) { 
+    NSLog(@"Not allowed to created files outside /Entities");
+    return NO;
+  }
+  
   // TODO create transactional create with key <type>-<filename>
   //      add create to current transaction
-  return NO;
+  
+  MAPIFuseTransaction *t = [self.transactionManager beginTransaction:@"singleton"];
+  
+  NSArray *pathComponents = [[path stringByDeletingPathExtension] pathComponents];
+  
+  NSString *type = [pathComponents lastObject];
+  NSString *name = [pathComponents objectAtIndex:pathComponents.count-2];
+    
+  [t enlist:[NSString stringWithFormat: @"%@/%@",type,name] type:type withMethod:CREATE];
+  
+  return YES;
 }
 
 #pragma mark File Contents
@@ -159,26 +206,65 @@ static NSString *helloPath = @"/hello.txt";
   // return [NSArray arrayWithObject:[helloPath lastPathComponent]];
   //return [self.types objectForKey:@"lastPathComponent"];
   if ([path isEqualToString:@"/"]) {
-    return self.types;
+    return self.topLevelFolders;
   } else {
     
-    for (NSString *type in self.types) {
-      if ([[@"/" stringByAppendingPathComponent:type] isEqualToString:path] ) {
-        
-        NSData *data = [self.mapi GET:[@"/" stringByAppendingString:type]];
-        
-        NSError *error;
-        
-        NSDictionary *entities = [[XMLReader dictionaryForXMLData:data error:&error] retain];
-        
-        NSMutableArray *files = [[NSMutableArray alloc] init];
-        for (NSString *entityId in [[[entities objectForKey:@"Collection"] objectForKey:type] valueForKey:@"Id"]) {
-          [files addObject:[NSString stringWithFormat:@"%@.xml", entityId]];
+    // /Transactions
+    
+    if ([path isEqualToString:@"/Transactions"]) {
+      // look up in tm
+      NSMutableArray *files = [[NSMutableArray alloc] init];
+      
+      MAPIFuseTransaction *t = [self.transactionManager currentTransaction];
+      
+      if(t != nil) {
+        [files addObject:t.name];
+      }
+      
+      return files;
+    }
+    
+    // /Entities
+    else if([path hasPrefix:@"/Entities"]) {
+      
+      if ([path isEqualToString:@"/Entities"]) return self.types;
+      
+      for (NSString *type in self.types) {
+        if ([[@"/Entities/" stringByAppendingPathComponent:type] isEqualToString:path] ) {
+          
+          NSData *data = [self.mapi GET:[@"/" stringByAppendingString:type]];
+          
+          NSError *error;
+          
+          NSDictionary *entities = [[XMLReader dictionaryForXMLData:data error:&error] retain];
+          
+          NSMutableArray *files = [[NSMutableArray alloc] init];
+          for (NSString *entityId in [[[entities objectForKey:@"Collection"] objectForKey:type] valueForKey:@"Id"]) {
+            [files addObject:[NSString stringWithFormat:@"%@.xml", entityId]];
+          }
+          
+          // add files which have been created as part of a transactions
+          MAPIFuseTransaction *t = [self.transactionManager currentTransaction];
+          
+          if(t != nil) {
+            NSArray *actionsOnType = [t actionsOnType:type];
+            for (MAPIFuseTransactionalAction *action in actionsOnType) {
+              
+              NSArray *pathComponents = [action.entityId pathComponents];
+              
+              [files addObject:[NSString stringWithFormat:@"%@.xml", [pathComponents lastObject]] ];              
+            }
+          }
+          
+          
+          return files;
+          
         }
-        return files;
-        
       }
     }
+  
+    
+
   }
   return nil;
 }
@@ -234,7 +320,8 @@ static NSString *helloPath = @"/hello.txt";
 
 - (BOOL)setAttributes:(NSDictionary *)attributes ofItemAtPath:(NSString *)path userData:(id)userData error:(NSError **)error {
   
-  NSLog(@"setAttributes %@",path); 
+  NSLog(@"setAttributes %@ with %@", path, attributes); 
+  // TODO --- YOU GOT TO HERE --- if "file" does not exist then create entry in transaction
   return YES;
 }
 

@@ -12,13 +12,20 @@
 @interface MAPIFuseTransaction : NSObject {
   
   NSMutableDictionary *actions;
+  NSString *name;
   
 }
 
 @property (nonatomic, retain) NSMutableDictionary *actions;
+@property (nonatomic, retain) NSString *name;
 
-- (MAPIFuseTransactionalAction *) enlist:(NSString *)entityId;
+- (id) initWithName:(NSString *)name;
+
+- (MAPIFuseTransactionalAction *) enlist:(NSString *)entityId type:(NSString *)type withMethod:(ActionMethod)method ;
+- (MAPIFuseTransactionalAction *) actionWithEntity:(NSString *)entityId;
+- (NSArray *) actionsOnType:(NSString *)type;
+
 - (BOOL) isEnlisted:(NSString *)entityId;
-- (BOOL) updatedEnlisted:(NSString *)entityId withAction:(MAPIFuseTransactionalAction *)action;
+- (void) updateEnlisted:(NSString *)entityId withAction:(MAPIFuseTransactionalAction *)action;
 
 @end

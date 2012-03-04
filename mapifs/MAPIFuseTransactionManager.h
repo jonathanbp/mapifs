@@ -17,6 +17,6 @@
 
 @property (nonatomic, retain) MAPIFuseTransaction *currentTransaction;
 
-- (MAPIFuseTransaction *) beginTransaction;
+- (MAPIFuseTransaction *) beginTransaction:(NSString *)transactionName;
 
 @end

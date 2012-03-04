@@ -9,12 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "MAPI.h"
 #import "MAPIFuseTransactionManager.h"
+#import "MAPIFuseTransactionSerializerProtocol.h"
 
 @interface MAPIFuseFileSystem : NSObject {
   
   NSArray *types;
   MAPI *mapi;
   MAPIFuseTransactionManager *transactionManager;
+  
+  id<MAPIFuseTransactionSerializerProtocol> serializer;
+  NSArray *topLevelFolders;
   
 }
 

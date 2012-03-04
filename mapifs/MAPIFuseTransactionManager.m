@@ -12,11 +12,13 @@
 
 @synthesize currentTransaction;
 
-- (MAPIFuseTransaction *) beginTransaction {
+- (MAPIFuseTransaction *) beginTransaction:(NSString *)transactionName {
   
-  MAPIFuseTransaction *t = [[MAPIFuseTransaction alloc] init];
+  if (self.currentTransaction == nil) {
+    self.currentTransaction = [[MAPIFuseTransaction alloc] initWithName:transactionName];
+  }
   
-  return t;
+  return self.currentTransaction;
   
 }
 
